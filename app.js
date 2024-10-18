@@ -8,7 +8,7 @@ const index = require('./routers/index');
 
 dotenv.config()
 const app = express()
-// const db = require('./config/dbConnection');
+const db = require('./config/dbConnection');
 
 app.use(cors())
 
