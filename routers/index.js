@@ -1,10 +1,11 @@
 const express = require('express');
 const router = express.Router();
 
-// const initialCount = require('./previousUserId')
-// router.use('/previous',initialCount)
 
-const admin = require('./admin');
-router.use('/admin', admin)
+const superAdmin = require('./superAdmin');
+router.use('/super-admin', superAdmin)
+
+const adminSchool = require('./adminSchool');
+router.use('/admin-school', adminSchool)
 
 module.exports = router;

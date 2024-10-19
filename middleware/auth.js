@@ -1,12 +1,12 @@
 const jwt = require("jsonwebtoken")
-const User = require("../models/user")
+const SuperAdmin = require("../models/superAdmin")
 
-const userAuth = async (req, res, next) => {
+
+const superAdminAuth = async (req, res, next) => {
     try {
-        
         const token = req.header("Authorization").replace("Bearer ", "")
         const decoded = jwt.verify(token, process.env.JWT_SECRET)
-        const user = await User.findOne({ _id: decoded._id })
+        const user = await SuperAdmin.findOne({ _id: decoded._id })
         if (!user) {
             throw new Error()
         }
@@ -20,5 +20,5 @@ const userAuth = async (req, res, next) => {
 
 }
 module.exports={
-    userAuth
+    superAdminAuth
 }
