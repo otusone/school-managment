@@ -6,7 +6,6 @@ const cloudinary = require("../config/cloudinary");
 exports.createAdminSchool = async (req, res) => {
     try {
         const { email, password, mobile, address, schoolName, alternateMobile, desc } = req.body;
-        console.log("data", email, password, mobile, address, schoolName, alternateMobile, desc);
         if (req.user.role !== 'super_admin') {
             return res.status(403).json({ message: 'Only Super Admin can onboard new School Admins' });
         }
@@ -20,6 +19,8 @@ exports.createAdminSchool = async (req, res) => {
         if (req.file) {
             try {
                 const imageName = "PLANET_EDU_" + Math.floor(Math.random() * 10) + req.file.originalname.split('.')[0];
+                console.log("imageName", imageName);
+                console.log("imageName", imageName);
                 const result = await cloudinary.uploader.upload(req.file.path, {
                     public_id: imageName,
                 });
@@ -30,7 +31,6 @@ exports.createAdminSchool = async (req, res) => {
         }
 
         const adminSchoolId = await generateSchoolAdminId();
-        console.log("adminSchoolId",adminSchoolId)
         const randomDigits = Math.floor(100 + Math.random() * 900);
         const schoolCode = schoolName.slice(0, 4).toUpperCase() + randomDigits + adminSchoolId.slice(-3);
 
@@ -49,7 +49,7 @@ exports.createAdminSchool = async (req, res) => {
             permissions: ['manage_students', 'manage_teachers', 'manage_parents', 'manage_classes', 'manage_subjects', 'manage_notifications'],
         });
 
-        //   await newAdminSchool.save();
+        await newAdminSchool.save();
 
         const token = await newAdminSchool.generateAuthToken();
 
@@ -64,6 +64,7 @@ exports.createAdminSchool = async (req, res) => {
                 mobile: newAdminSchool.mobile,
                 address: newAdminSchool.address,
                 role: newAdminSchool.role,
+                logo:newAdminSchool.logo,
                 token,
             },
         });
@@ -71,8 +72,6 @@ exports.createAdminSchool = async (req, res) => {
         return res.status(500).json({ message: error.message || 'Internal server error. Please try again later' });
     }
 };
-
-
 
 
 exports.updateAdminSchoolLogo = async (req, res) => {
@@ -114,5 +113,45 @@ exports.updateAdminSchoolLogo = async (req, res) => {
         return res.status(200).json({ message: 'Logo updated successfully', newLogoUrl });
     } catch (error) {
         return res.status(500).json({ message: error.message || 'Internal server error' });
+    }
+};
+
+exports.loginAdminSchool = async (req, res) => {
+    try {
+        const { email, password, schoolCode } = req.body;
+
+        if (!email || !password || !schoolCode) {
+            return res.status(400).json({ message: 'Please provide email, password, and school code' });
+        }
+
+        const adminSchool = await AdminSchool.findOne({ email, schoolCode });
+        if (!adminSchool) {
+            return res.status(401).json({ message: 'Invalid credentials' });
+        }
+
+        const isPasswordValid = await bcrypt.compare(password, adminSchool.password);
+        if (!isPasswordValid) {
+            return res.status(401).json({ message: 'Invalid credentials' });
+        }
+
+        const token = await adminSchool.generateAuthToken();
+        adminSchool.lastLogin = new Date();
+        await adminSchool.save();
+
+        return res.status(200).json({
+            message: 'Login successful',
+            adminSchool: {
+                _id: adminSchool._id,
+                adminSchoolId: adminSchool.adminSchoolId,
+                schoolName: adminSchool.schoolName,
+                schoolCode: adminSchool.schoolCode,
+                email: adminSchool.email,
+                mobile: adminSchool.mobile,
+                role: adminSchool.role,
+                token,
+            },
+        });
+    } catch (error) {
+        return res.status(500).json({ message: error.message || 'Internal server error. Please try again later.' });
     }
 };

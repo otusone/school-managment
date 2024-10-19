@@ -21,10 +21,7 @@ const adminSchoolSchema = Joi.object({
     'any.required': 'School name is required',
     'string.empty': 'School name cannot be empty',
   }),
-  schoolCode: Joi.string().trim().required().messages({
-    'any.required': 'School code is required',
-    'string.empty': 'School code cannot be empty',
-  }),
+  desc: Joi.string().trim(),
   alternateMobile: Joi.string().required().messages({
     'any.required': 'Alternate mobile number is required',
     'string.pattern.base': 'Alternate mobile number must be a valid 10-digit number',
@@ -32,7 +29,6 @@ const adminSchoolSchema = Joi.object({
 });
 
 const validateAdminSchool = (req, res, next) => {
-  console.log("data",req.body)
     const { error } = adminSchoolSchema.validate(req.body, { abortEarly: false });
 
     if (error) {

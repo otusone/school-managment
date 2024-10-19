@@ -1,4 +1,7 @@
 const mongoose = require('mongoose');
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+
 const adminSchoolSchema = new mongoose.Schema({
   adminSchoolId: { type: String, required: true, unique: true, },
   schoolName: { type: String, required: true,trim: true },
