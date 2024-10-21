@@ -1,5 +1,7 @@
 const bcrypt = require("bcryptjs");
 const AdminSchool = require('../models/adminSchool');
+const Teacher = require('../models/teacher');
+
 const { generateSchoolAdminId } = require('../utils/adminSchool');
 const cloudinary = require("../config/cloudinary");
 
@@ -29,10 +31,12 @@ exports.createAdminSchool = async (req, res) => {
                 return res.status(500).json({ message: 'Logo upload failed. Please try again.', error: uploadError.message });
             }
         }
-
+        const normalizeSchoolName = (schoolName) => {
+            return schoolName.replace(/\s+/g, '').toUpperCase();
+        };
         const adminSchoolId = await generateSchoolAdminId();
         const randomDigits = Math.floor(100 + Math.random() * 900);
-        const schoolCode = schoolName.slice(0, 4).toUpperCase() + randomDigits + adminSchoolId.slice(-3);
+        const schoolCode = normalizeSchoolName.slice(0, 4)+ randomDigits + adminSchoolId.slice(-3);
 
         const newAdminSchool = new AdminSchool({
             adminSchoolId,
@@ -72,7 +76,6 @@ exports.createAdminSchool = async (req, res) => {
         return res.status(500).json({ message: error.message || 'Internal server error. Please try again later' });
     }
 };
-
 
 exports.updateAdminSchoolLogo = async (req, res) => {
     try {
@@ -155,3 +158,28 @@ exports.loginAdminSchool = async (req, res) => {
         return res.status(500).json({ message: error.message || 'Internal server error. Please try again later.' });
     }
 };
+
+exports.getAllTeacher = async (req, res) => {
+    try {
+        const { _id: schoolId, role, adminSchoolId } = req.user;
+
+        if (role !== 'school_admin') {
+            return res.status(403).json({ message: 'Access denied. Only School Admin can access the teacher list.' });
+        }
+
+        const teachers = await Teacher.find({ adminSchoolId, school: schoolId })
+            .select('-token -updatedAt -isDeleted -lastLogin -createdAt');
+
+        if (teachers.length === 0) {
+            return res.status(404).json({ message: 'No teachers found for this school.' });
+        }
+
+        return res.status(200).json({
+            message: 'Teacher list retrieved successfully.',
+            teachers,
+        });
+    } catch (error) {
+        return res.status(500).json({ message: error.message || 'Internal server error. Please try again later.' });
+    }
+};
+

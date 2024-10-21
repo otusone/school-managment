@@ -1,8 +1,12 @@
 const mongoose = require('mongoose');
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+
 const teacherSchema = new mongoose.Schema({
   teacherId: {type: String,required: true,unique: true,},
   name: {
     firstName: { type: String, required: true,trim: true },
+    middleName: { type: String,trim: true },
     lastName: { type: String, required: true,trim: true },
   },
   email: {type: String,required: true,unique: true,},
@@ -11,8 +15,10 @@ const teacherSchema = new mongoose.Schema({
     subjectId: { type: mongoose.Schema.Types.ObjectId, ref: 'Subject' },
     classId: { type: mongoose.Schema.Types.ObjectId, ref: 'Class' } 
   }],
-  school: {type: mongoose.Schema.Types.ObjectId,ref: 'AdminSchool',required: true,
-  },
+  specializations: { type: [String], default: [] },
+  school: {type: mongoose.Schema.Types.ObjectId,ref: 'AdminSchool',required: true,},
+  schoolCode: { type: String, required: true, },
+  adminSchoolId: { type: String, required: true},
   contactInfo: {
     phone: { type: String, required: true },
     address: { type: String, required: true },
@@ -22,6 +28,11 @@ const teacherSchema = new mongoose.Schema({
   token: { type: String },
   avatar: { type: String,trim: true},
   lastLogin: { type: Date, default: null },
+  isDeleted: { type: Boolean, default: false },
+  
+}, {
+  versionKey: false,
+  timestamps: true
 });
 
 

@@ -1,10 +1,10 @@
 
 const mongoose = require('mongoose');
 const dbURL = process.env.MONGO_URI;
-
+const Teacher=require("../models/teacher")
 
 mongoose.connect(dbURL, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => {
+  .then(async() => {
     console.log('Connected to MongoDB');
 
     // User.updateMany(
@@ -19,6 +19,8 @@ mongoose.connect(dbURL, { useNewUrlParser: true, useUnifiedTopology: true })
     //   console.error('Error updating records: ', error);
     // });
 
+    // await Teacher.collection.dropIndex({ schoolCode: 1 });
+    // await Teacher.collection.dropIndex({ adminSchoolId: 1 });
   })
   .catch((error) => {
     console.error('Error connecting to MongoDB:', error);

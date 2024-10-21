@@ -1,10 +1,11 @@
 const express = require('express');
-const { createSuperAdmin, loginSuperAdmin } = require('../controllers/superAdmin');
+const { createSuperAdmin, loginSuperAdmin, addClass, addSection } = require('../controllers/superAdmin');
 const { createAdminSchool, testAdmin } = require('../controllers/adminSchool');
 const { superAdminAuth } = require('../middleware/auth');
 const { validateAdminSchool } = require('../middleware/fieldValidation');
 const router = express.Router();
 const multer=require("multer");
+const { addNewSubject } = require('../controllers/subject');
 
 const storage=multer.diskStorage({})
 
@@ -14,6 +15,11 @@ const upload=multer({storage})
 router.post('/new-signup',createSuperAdmin);
 router.post('/login',loginSuperAdmin);
 
+
+// common
+router.post('/add-section',superAdminAuth,addSection);
+router.post('/add-class',superAdminAuth,addClass);
+router.post('/add-subject',superAdminAuth,addNewSubject);
 
 // admin school
 router.post('/onboard-new-admin-school',superAdminAuth,upload.single("logo"),validateAdminSchool, createAdminSchool);

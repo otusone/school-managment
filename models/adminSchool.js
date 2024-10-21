@@ -29,6 +29,7 @@ const adminSchoolSchema = new mongoose.Schema({
   token: { type: String },
   logo: { type: String,required:true,trim: true },
   lastLogin: { type: Date, default: null },
+  isDeleted: { type: Boolean, default: false },
 
 }, {
   versionKey: false,

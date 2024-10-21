@@ -1,5 +1,7 @@
 const SuperAdmin = require('../models/superAdmin');
 const bcrypt = require("bcryptjs");
+const Class = require('../models/class');
+const Section = require('../models/section');
 
 const { generateSuperAdminId } = require('../utils/superAdminId');
 
@@ -80,5 +82,60 @@ exports.loginSuperAdmin = async (req, res) => {
         });
     } catch (error) {
         return res.status(500).json({ message: error.message || 'Internal server error. Please try again later' });
+    }
+};
+
+
+exports.addClass = async (req, res) => {
+    try {
+        const { className, classSection } = req.body;
+        const existingClass = await Class.findOne({ className, classSection });
+        if (existingClass) {
+            return res.status(400).json({ message: 'Class with this name and section already exists.' });
+        }
+
+        const newClass = new Class({
+            className,
+            classSection
+        });
+
+        await newClass.save();
+
+        return res.status(201).json({
+            message: 'Class added successfully.',
+            class: {
+                _id: newClass._id,
+                className: newClass.className,
+                classSection: newClass.classSection,
+            },
+        });
+    } catch (error) {
+        return res.status(500).json({ message: error.message || 'Internal server error. Please try again later.' });
+    }
+};
+
+exports.addSection = async (req, res) => {
+    try {
+        const {classSection } = req.body;
+        const existingClassSection = await Section.findOne({classSection });
+        if (existingClassSection) {
+            return res.status(400).json({ message: 'Section with this name already exists.' });
+        }
+
+        const newClassSection = new Section({
+            classSection
+        });
+
+        await newClassSection.save();
+
+        return res.status(201).json({
+            message: 'Section added successfully.',
+            section: {
+                _id: newClassSection._id,
+                classSection: newClassSection.classSection,
+            },
+        });
+    } catch (error) {
+        return res.status(500).json({ message: error.message || 'Internal server error. Please try again later.' });
     }
 };

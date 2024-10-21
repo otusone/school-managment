@@ -26,6 +26,7 @@ const studentSchema = new mongoose.Schema({
   token: { type: String },
   avatar: { type: String,trim: true},
   lastLogin: { type: Date, default: null },
+  isDeleted: { type: Boolean, default: false },
 
 }, {
     versionKey: false,
