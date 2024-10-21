@@ -40,12 +40,7 @@ exports.createTimetable = async (req, res) => {
     }
   };
   
-
-
-
-
-
-  exports.getTimetable = async (req, res) => {
+exports.getTimetable = async (req, res) => {
     const { classId, date } = req.query;
     const requestedDate = new Date(date);
   
@@ -84,5 +79,37 @@ exports.createTimetable = async (req, res) => {
     } catch (error) {
       return res.status(500).json({ message: error.message || 'Internal server error.' });
     }
+  };
+  
+exports.updateTimetableExceptions = async (req, res) => {
+      const { timetableId } = req.params;
+      const { date, tempTeacher, reason } = req.body;
+  
+      try {
+          const existingTimetable = await Timetable.findById(timetableId);
+  
+          if (!existingTimetable) {
+              return res.status(404).json({ message: 'Timetable not found.' });
+          }
+  
+          const existingException = existingTimetable.exceptions.find(exception => exception.date.toISOString() === new Date(date).toISOString());
+  
+          if (existingException) {
+              existingException.tempTeacher = tempTeacher || existingException.tempTeacher;
+              existingException.reason = reason || existingException.reason;
+          } else {
+              existingTimetable.exceptions.push({ date: new Date(date), tempTeacher, reason });
+          }
+  
+          await existingTimetable.save();
+          return res.status(200).json({
+              message: 'Timetable exceptions updated successfully.',
+              timetable: existingTimetable
+          });
+      } catch (error) {
+          return res.status(500).json({ 
+              message: error.message || 'Internal server error. Please try again later.' 
+          });
+      }
   };
   

@@ -4,7 +4,7 @@ const { onboardTeacher } = require('../controllers/teacher');
 const { schoolAdminAuth } = require('../middleware/auth');
 const multer=require("multer");
 const { addNewSubject, getAllSubjects } = require('../controllers/subject');
-const { createTimetable } = require('../controllers/timeTable');
+const { createTimetable, updateTimetableExceptions } = require('../controllers/timeTable');
 
 const router = express.Router();
 
@@ -24,6 +24,7 @@ router.get('/get-all-teacher',schoolAdminAuth,getAllTeacher);
 
 // time table
 router.post('/create-new-time-table',schoolAdminAuth,createTimetable);
+router.patch('/update-time-table-for-particular-date',schoolAdminAuth,updateTimetableExceptions);
 
 module.exports = router;
 

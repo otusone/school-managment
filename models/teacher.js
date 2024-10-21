@@ -11,10 +11,6 @@ const teacherSchema = new mongoose.Schema({
   },
   email: {type: String,required: true,unique: true,},
   password: {type: String,required: true,},
-  subjects: [{
-    subjectId: { type: mongoose.Schema.Types.ObjectId, ref: 'Subject' },
-    classId: { type: mongoose.Schema.Types.ObjectId, ref: 'Class' } 
-  }],
   specializations: { type: [String], default: [] },
   school: {type: mongoose.Schema.Types.ObjectId,ref: 'AdminSchool',required: true,},
   schoolCode: { type: String, required: true, },
