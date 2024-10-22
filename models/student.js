@@ -6,15 +6,11 @@ const studentSchema = new mongoose.Schema({
     middleName: { type: String,trim: true},
     lastName: { type: String, required: true,trim: true },
   },
-  email: {type: String,required: true,unique: true,},
+  email: {type: String,required: true,},
   password: {type: String,required: true,},
   class: {type: mongoose.Schema.Types.ObjectId,ref: 'Class', required: true,},
-  subjects: [{
-    subjectId: { type: mongoose.Schema.Types.ObjectId, ref: 'Subject' }, 
-    teacherId: { type: mongoose.Schema.Types.ObjectId, ref: 'Teacher' }
-  }],
   school: {type: mongoose.Schema.Types.ObjectId,ref: 'AdminSchool',required: true,},
-  parent: {type: mongoose.Schema.Types.ObjectId,ref: 'Parent',},
+  parent: {type: mongoose.Schema.Types.ObjectId,ref: 'Parent',default:null},
   dateOfBirth: {type: Date,required: true,},
   gender: {type: String,enum: ['Male', 'Female', 'Other'],required: true,},
   contactInfo: {

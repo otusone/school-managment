@@ -1,6 +1,10 @@
+const mongoose = require('mongoose');
 const bcrypt = require("bcryptjs");
 const AdminSchool = require('../models/adminSchool');
 const Teacher = require('../models/teacher');
+const Student = require('../models/student');
+const Class = require('../models/class');
+const Parent = require('../models/parent');
 
 const { generateSchoolAdminId } = require('../utils/adminSchool');
 const cloudinary = require("../config/cloudinary");
@@ -182,4 +186,7 @@ exports.getAllTeacher = async (req, res) => {
         return res.status(500).json({ message: error.message || 'Internal server error. Please try again later.' });
     }
 };
+
+
+
 

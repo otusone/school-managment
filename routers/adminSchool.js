@@ -5,6 +5,7 @@ const { schoolAdminAuth } = require('../middleware/auth');
 const multer=require("multer");
 const { addNewSubject, getAllSubjects } = require('../controllers/subject');
 const { createTimetable, updateTimetableExceptions } = require('../controllers/timeTable');
+const { onboardStudent } = require('../controllers/student');
 
 const router = express.Router();
 
@@ -21,6 +22,10 @@ router.post('/add-subject',schoolAdminAuth,addNewSubject);
 // teacher
 router.post('/onboard-new-teacher',schoolAdminAuth, upload.single("avatar"),onboardTeacher);
 router.get('/get-all-teacher',schoolAdminAuth,getAllTeacher);
+
+// student
+router.post('/onboard-new-student',schoolAdminAuth, upload.single("avatar"),onboardStudent);
+router.get('/get-all-student',schoolAdminAuth);
 
 // time table
 router.post('/create-new-time-table',schoolAdminAuth,createTimetable);

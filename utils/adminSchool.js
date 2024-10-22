@@ -32,4 +32,18 @@ const generateSchoolTeacherId = async (schoolCode, session) => {
   }
 };
 
-module.exports = { generateSchoolAdminId,generateSchoolTeacherId };
+const generateSchoolStudentId = async (schoolCode, session) => {
+  try {
+      const counter = await SchoolTeacherCounter.findOneAndUpdate(
+          { counterType: `${schoolCode}_schoolStudentId` },
+          { $inc: { counter: 1 } },
+          { new: true, upsert: true, session } 
+      );
+      const schoolAdminId = `${schoolCode.slice(0, 4).toUpperCase()}_T${String(counter.counter).padStart(2, '0')}`;
+      return schoolAdminId;
+  } catch (error) {
+      throw new Error(error.message || 'Failed to generate School Teacher ID');
+  }
+};
+
+module.exports = { generateSchoolAdminId,generateSchoolTeacherId,generateSchoolStudentId };
