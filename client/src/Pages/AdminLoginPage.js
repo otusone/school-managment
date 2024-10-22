@@ -34,7 +34,7 @@ const AdminLogin = () => {
 
     const onSubmit = (data) => {
         console.log("Form Data:", data);
-        navigate("/admin/dashboard")
+        navigate("/student/dashboard")
     };
 
     const togglePasswordVisibility = () => {
@@ -176,7 +176,7 @@ const AdminLogin = () => {
                     <p className="text-center text-[#00000080] font-semibold my-3 "> Login as</p>
                     <div className="grid grid-cols-2 gap-5 mt-5">
                         <div className="bg-[#1BCFB4] py-2 ">
-                            <p className="text-center text-[#FFFFFF] font-semibold">Teacher</p>
+                            <button className="text-center text-[#FFFFFF] font-semibold">Teacher</button>
 
                         </div>
                         <div className="bg-[#198AE2] py-2 ">

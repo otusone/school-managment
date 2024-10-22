@@ -20,8 +20,8 @@ const ManageLesson = () => {
     return (
         <div className="font-poppins ">
           <Headingtitle title="Manage Lesson"/>
-            <main className="bg-white rounded-md p-16 text-[0.77rem] relative min-h-[80vh]">
-                <p className="font-bold text-[1.1rem] ">Manage Lesson</p>
+            <main className="bg-white rounded-md px-10 py-5 text-[0.77rem] relative min-h-[80vh]">
+                <p className="font-semibold text-[1.1rem] pb-2 ">Manage Lesson</p>
 
                 {/* Grid Layout */}
                 <div className="grid grid-cols-12 gap-5 mb-5 font-poppins">

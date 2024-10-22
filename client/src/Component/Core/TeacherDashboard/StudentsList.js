@@ -13,19 +13,51 @@ const StudentList = () => {
         setExpandedIndex(expandedIndex === index ? null : index);
     };
 
+    const [isOpen, setIsOpen] = useState(false);
+    const [selectedOption, setSelectedOption] = useState("ALL");
+
+    const options = ["ALL", "Option 1", "Option 2", "Option 3"]; // Add more options as needed
+
+    const toggleDropdown = () => {
+        setIsOpen(!isOpen);
+    };
+
+    const handleOptionSelect = (option) => {
+        setSelectedOption(option);
+        setIsOpen(false); // Close dropdown after selection
+    };
+
     return (
         <div className="font-poppins">
-            <Headingtitle title="Students"/>
-
-            <main className="bg-white  rounded-md p-3 ">
-                <p className="font-bold text-[1rem] py-2 ">Student List</p>
+            <Headingtitle title="Students" />
+            <main className="bg-white min-h-[80vh]   rounded-md p-5 ">
+                <p className="font-semibold text-[1rem] pb-2 ">Student List</p>
 
                 {/* Filters Section */}
                 <div className="grid w-full text-[0.77rem] grid-cols-12 gap-5 grid-rows-2 mb-5">
                     {/* All Filter */}
-                    <div className="col-span-5 flex border-2 border-border-100 rounded-md p-2 justify-between">
-                        <p className="text-[0.77rem] font-semibold">ALL</p>
-                        <BiSolidDownArrow />
+                    <div className="relative col-span-5">
+                        <div
+                            className="col-span-5 flex border-2 border-border-100 rounded-md p-2 justify-between cursor-pointer"
+                            onClick={toggleDropdown}
+                        >
+                            <p className="text-[0.77rem] font-semibold">{selectedOption}</p>
+                            <BiSolidDownArrow />
+                        </div>
+
+                        {isOpen && (
+                            <div className="absolute left-0 mt-1 w-full bg-white border border-gray-300 rounded-md shadow-lg z-10">
+                                {options.map((option, index) => (
+                                    <div
+                                        key={index}
+                                        className="p-2 hover:bg-gray-200 cursor-pointer"
+                                        onClick={() => handleOptionSelect(option)}
+                                    >
+                                        {option}
+                                    </div>
+                                ))}
+                            </div>
+                        )}
                     </div>
 
                     {/* Date Filter */}
