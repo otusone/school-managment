@@ -19,7 +19,7 @@ import {
 
 } from './Component/Core/StudentDashboard';
 
-import { ParentDashboardPage, ParentDashboard } from "./Component/Core/ParentDashboard"
+import { ParentDashboardPage, ParentDashboard, TransPortVehicletList, VehicleRoute } from "./Component/Core/ParentDashboard"
 
 function App() {
   return (
@@ -59,8 +59,8 @@ function App() {
         <Route path="/parent/dashboard" element={<ParentDashboardPage />} >
           <Route index element={<ParentDashboard />} />
           <Route path='attendance' element={<AttendancePage />} />
-          <Route path='transport' element={<p>oo</p>} />
-          <Route path='detail/transportRoute' element={<p>oo</p>} />
+          <Route path='transport' element={<TransPortVehicletList />} />
+          <Route path='detail/transportRoute' element={<VehicleRoute />} />
           <Route path='timetable' element={<StudentTimeTable />} />
           <Route path='announcment' element={<StudentNotice />} />
           <Route path='academic-calender' element={<AcademicCalender />} />

@@ -15,17 +15,17 @@ const Sidebar = ({ Sidebar }) => {
 
     return (
         <div className='px-4'>
-            <div className='w-full bg-red-300'>
-                <input type='text'
-                 placeholder='search'
-                    className='w-[230px] h-[45px] bg-[#F7F7F7]'
-                />
-            </div>
+            <input
+                type='text'
+                placeholder='Search Menu'
+                className='w-[80%] py-1.5 mt-1 items-center placeholder:text-[0.77rem] placeholder:text-[#979797] font-semibold bg-[#F7F7F7] rounded-lg pl-2 border border-black'
+            />
+
             {Sidebar.map((item, index) => (
-                <div key={index} className="mb-2 py-2 font-semibold">
+                <div key={index} className="mb-2 py-2 font-semibold cursor-pointer">
                     {/* Check if item has sub-links */}
                     {item.Links ? (
-                        <div>
+                        <div className='cursor-pointer'>
                             <div
                                 className="flex justify-between items-center cursor-pointer"
                                 onClick={() => handleToggle(index)}

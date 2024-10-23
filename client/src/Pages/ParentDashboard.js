@@ -20,7 +20,9 @@ const ParentDashboardPage = () => {
             <main className="col-span-12 md:col-span-9 lg:col-span-10 flex flex-col">
                 <nav className="h-[70px] w-full bg-[#FFFF]   flex justify-between px-10 font-poppins">
                     <div className="h-full w-[120px] flex items-center justify-between ">
-                        <IoMenuOutline className="w-[30px] h-[40px]" />
+                        <IoMenuOutline
+                        
+                        className="w-[30px] h-[40px]" />
                         <p className="text-text_Black-100 font-poppins text-[1.1rem]">PlantEdu</p>
                     </div>
                     <div className="w-[480px] flex flex-row justify-between items-center">
