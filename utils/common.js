@@ -14,36 +14,35 @@ let generateRandomID = async (generatenewUserID) => {
     ;
 }
 
-const generatePassword = () => {
-    const lowerCase = 'abcdefghijklmnopqrstuvwxyz';
-    const upperCase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+const generatePassword = (firstName) => {
+    const specialChars = '@#$%';
     const numbers = '0123456789';
-    const specialChars = '!@#$%^&*()_+[]{}|;:,.<>?';
-    
-    const allChars = lowerCase + upperCase + numbers + specialChars;
-    
-    let password = '';
-    
-    // Ensure at least one of each type
-    password += lowerCase[Math.floor(Math.random() * lowerCase.length)];
-    password += upperCase[Math.floor(Math.random() * upperCase.length)];
-    password += numbers[Math.floor(Math.random() * numbers.length)];
-    password += specialChars[Math.floor(Math.random() * specialChars.length)];
-    
-    // Generate the rest randomly
-    for (let i = 4; i < Math.floor(Math.random() * 3) + 8; i++) {
-        password += allChars[Math.floor(Math.random() * allChars.length)];
+
+    let processedName = firstName.slice(0, 6);
+    processedName = processedName.charAt(0).toUpperCase() + processedName.slice(1).toLowerCase();
+
+    const specialChar = specialChars[Math.floor(Math.random() * specialChars.length)];
+
+    // Calculate how many random digits are needed
+    const minPasswordLength = 8;
+    const remainingLength = Math.max(minPasswordLength - (processedName.length + specialChar.length), 3);
+
+    let randomDigits = '';
+    for (let i = 0; i < remainingLength; i++) {
+        randomDigits += numbers[Math.floor(Math.random() * numbers.length)];
     }
-    
+
+    const password = `${processedName}${specialChar}${randomDigits}`;
     return password;
 };
 
-generatePassword();
 
-// module.exports = {
-//      generateRandomID: generateRandomID,
-//      generatePassword
-//     };
+
+
+module.exports = {
+     generateRandomID: generateRandomID,
+     generatePassword
+    };
 
 
     

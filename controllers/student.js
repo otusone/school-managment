@@ -7,6 +7,7 @@ const Class = require('../models/class');
 const Parent = require('../models/parent');
 const { generateSchoolStudentId } = require('../utils/adminSchool');
 const cloudinary = require("../config/cloudinary");
+const {generatePassword}=require("../utils/common")
 
 
 exports.onboardStudent = async (req, res) => {
@@ -19,7 +20,7 @@ exports.onboardStudent = async (req, res) => {
       return res.status(403).send({ error: 'Access denied. Only school admins can onboard students.' });
     }
 
-    const { firstName, middleName, lastName, email, password,
+    const { firstName, middleName, lastName, email,
       classId,dateOfBirth, gender, mobile, address, } = req.body;
 
     const classData = await Class.findById(classId);
@@ -46,6 +47,7 @@ exports.onboardStudent = async (req, res) => {
     //   }
     // }
 
+    const password = generatePassword(firstName);
     const newStudent = new Student({
       studentId,
       name: { firstName, middleName, lastName },

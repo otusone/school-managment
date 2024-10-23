@@ -39,11 +39,25 @@ const generateSchoolStudentId = async (schoolCode, session) => {
           { $inc: { counter: 1 } },
           { new: true, upsert: true, session } 
       );
-      const schoolAdminId = `${schoolCode.slice(0, 4).toUpperCase()}_T${String(counter.counter).padStart(2, '0')}`;
+      const schoolAdminId = `${schoolCode.slice(0, 4).toUpperCase()}_S${String(counter.counter).padStart(2, '0')}`;
       return schoolAdminId;
   } catch (error) {
       throw new Error(error.message || 'Failed to generate School Teacher ID');
   }
 };
 
-module.exports = { generateSchoolAdminId,generateSchoolTeacherId,generateSchoolStudentId };
+const generateStudentParentId = async (schoolCode, session) => {
+  try {
+      const counter = await SchoolTeacherCounter.findOneAndUpdate(
+          { counterType: `${schoolCode}_StudentParentId` },
+          { $inc: { counter: 1 } },
+          { new: true, upsert: true, session } 
+      );
+      const schoolAdminId = `${schoolCode.slice(0, 4).toUpperCase()}_P${String(counter.counter).padStart(2, '0')}`;
+      return schoolAdminId;
+  } catch (error) {
+      throw new Error(error.message || 'Failed to generate School Teacher ID');
+  }
+};
+
+module.exports = { generateSchoolAdminId,generateSchoolTeacherId,generateSchoolStudentId,generateStudentParentId };

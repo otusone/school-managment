@@ -2,6 +2,8 @@ const mongoose = require('mongoose');
 
 const parentSchema = new mongoose.Schema({
     parentId: { type: String, required: true, unique: true },
+    school: { type: mongoose.Schema.Types.ObjectId, ref: 'AdminSchool', required: true, },
+    role: { type: String, enum: ['Parent'], default: "Parent" },
     father: {
         firstName: { type: String, trim: true },
         middleName: { type: String, trim: true },
@@ -25,7 +27,6 @@ const parentSchema = new mongoose.Schema({
     },
 
     guardian: {
-        role: { type: String, enum: ['Father', 'Mother', 'Guardian'], required: true },
         relations: { type: String, required: true },
         firstName: { type: String, required: true, trim: true },
         middleName: { type: String, trim: true },
@@ -66,13 +67,24 @@ parentSchema.methods.toJSON = function () {
 // Generate JWT token
 parentSchema.methods.generateAuthToken = async function () {
     const user = this;
-    const token = jwt.sign({ _id: user._id.toString() }, process.env.JWT_SECRET, {
+    const token = jwt.sign({
+        _id: user._id.toString(),
+        parentId: user.parentId,
+        email: user.email,
+        role: user.role,
+    }, process.env.JWT_SECRET, {
         expiresIn: process.env.TOKEN_EXPIRE
     });
-    user.token = token;
+
+    if (user.tokens.length >= 2) {
+        user.tokens.shift();
+    }
+
+    user.tokens = user.tokens.concat({ token });
+
     await user.save();
     return token;
-};
+}
 
 userSchema.methods.removeExpiredTokens = async function () {
     const user = this;

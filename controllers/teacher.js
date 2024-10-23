@@ -4,6 +4,7 @@ const AdminSchool = require('../models/adminSchool');
 const Timetable = require('../models/timeTable');
 
 const { generateSchoolTeacherId } = require('../utils/adminSchool');
+const {generatePassword}=require("../utils/common")
 const bcrypt = require("bcryptjs");
 
 exports.onboardTeacher = async (req, res) => {
@@ -12,7 +13,7 @@ exports.onboardTeacher = async (req, res) => {
 
     try {
         const { _id: schoolId, role, schoolCode, adminSchoolId } = req.user;
-        const { firstName, middleName, lastName, email, password, phone, address, specializations } = req.body;
+        const { firstName, middleName, lastName, email, phone, address, specializations } = req.body;
 
         if (role !== 'school_admin') {
             return res.status(403).json({ message: 'Only School Admin can onboard new Teacher' });
@@ -34,6 +35,7 @@ exports.onboardTeacher = async (req, res) => {
         }
         const teacherId = await generateSchoolTeacherId(schoolCode, session);
         const avatar_url = "";
+        const password = generatePassword(firstName);
         const newTeacher = new Teacher({
             teacherId: teacherId,
             name: {
