@@ -10,6 +10,8 @@ import StudentNotice from "./StudentNotice";
 import StudentResultList from "./StudentResultList";
 import StudentExamResult from "./StudentExamResult";
 import StudentParents from "./StudentParents";
+import AttendancePage from "./StudentAttendance";
+import AcademicCalender from "./AcademicCalender";
 export {
     StudentDashboard,
     StudentDetailSubjects,
@@ -19,7 +21,9 @@ export {
     StudentSubmitAssignment,
     StudentTimeTable,
     StudentNotice,
+    AttendancePage,
     StudentResultList,
     StudentExamResult,
-    StudentParents
+    StudentParents,
+    AcademicCalender
 };

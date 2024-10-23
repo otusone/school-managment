@@ -4,7 +4,7 @@ import { Link, useLocation } from "react-router-dom"; // Import Link and useLoca
 import { FaHouseUser } from "react-icons/fa";
 
 const Sidebar = ({ Sidebar }) => {
-    
+
     const [expanded, setExpanded] = useState(null); // Track which accordion is expanded
     const location = useLocation(); // Get the current location
     const currentPath = location.pathname; // Current pathname
@@ -15,6 +15,12 @@ const Sidebar = ({ Sidebar }) => {
 
     return (
         <div className='px-4'>
+            <div className='w-full bg-red-300'>
+                <input type='text'
+                 placeholder='search'
+                    className='w-[230px] h-[45px] bg-[#F7F7F7]'
+                />
+            </div>
             {Sidebar.map((item, index) => (
                 <div key={index} className="mb-2 py-2 font-semibold">
                     {/* Check if item has sub-links */}

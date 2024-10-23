@@ -2,16 +2,16 @@ import React from "react";
 import { BiSolidDownArrow } from "react-icons/bi";
 import Headingtitle from "../../Common/Headingtitle";
 import Count_Icon from "../../../Assests/Logos/Count_Icon.png"
-import Student_Img from "../../../Assests/Logos/Student_Img.png"
+// import Teacher_Img from "../../../Assests/Logos/Teacher_Img.png"
 
-const StudentDashboard = () => {
+const TeacherDashboard = () => {
     const DashboardData = [{
         title: "Class",
         count: 12
     },
 
     {
-        title: "Student",
+        title: "Teacher",
         count: 129
     },
     {
@@ -49,13 +49,13 @@ const StudentDashboard = () => {
                     }
 
                     <div className="col-span-6 h-[410px] justify-between flex flex-col font-poppins bg-white text-text_blue-500 px-5 py-3  rounded-xl shadow-md">
-                        <p className="text-[1.5rem]  font-semibold h-[100px] border-b-[1px] pl-5 border-border-100">Student Info</p>
+                        <p className="text-[1.5rem]  font-semibold h-[100px] border-b-[1px] pl-5 border-border-100">Teacher Info</p>
                         <div className="flex justify-between w-full my-1 h-[250px]  mb-5 pl-5">
                             <div className="w-[50%]">
                                 <div className="flex gap-[4px] flex-col">
-                                    <img src={Student_Img} className="w-[100px] h-[100px]" />
+                                    <img src="" className="w-[100px] h-[100px]" />
                                     <p className="font-poppins text-[1.1rem] font-semibold leading-[27px] text-left">
-                                        Student Name
+                                        Teacher Name
                                     </p>
 
                                     <p className="font-poppins text-[0.88rem] text-text_gray-100  ">Mohit</p>
@@ -104,5 +104,5 @@ const StudentDashboard = () => {
     );
 };
 
-export default StudentDashboard;
+export default TeacherDashboard;
 

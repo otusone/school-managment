@@ -1,5 +1,5 @@
 import React from "react";
-import { Outlet } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import Sidebar from "../Component/Common/Sidebar";
 import { StudentSidebarItems } from "../data/SidebarItem";
 import worldLogo from "../Assests/Logos/world.png"
@@ -11,7 +11,9 @@ const StudentDashboardPage = () => {
         <div className="w-[100vw] h-[100vh] grid grid-cols-12">
             <aside className="col-span-12 md:col-span-3 lg:col-span-2 max-w-[330px] bg-[#FFFF] ">
                 <div className="w-full h-[50px]  flex justify-center items-center my-2">
-                    <img src={worldLogo} className="w-[80px] h-[50px]" />
+                    <Link to={"/"}>
+                        <img src={worldLogo} className="w-[80px] h-[50px]" />
+                    </Link>
                 </div>
                 <Sidebar Sidebar={StudentSidebarItems} />
             </aside>

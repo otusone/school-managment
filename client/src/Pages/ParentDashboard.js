@@ -1,12 +1,12 @@
 import React from "react";
 import { Link, Outlet } from "react-router-dom";
 import Sidebar from "../Component/Common/Sidebar";
-import { TeachersidebarItems } from "../data/SidebarItem";
+import { ParentSidebarItems } from "../data/SidebarItem";
 import worldLogo from "../Assests/Logos/world.png"
 import { IoMenuOutline } from "react-icons/io5";
 import avtar from "../Assests/Logos/avtar.png"
 
-const TeacherDashboard = () => {
+const ParentDashboardPage = () => {
     return (
         <div className="w-[100vw] h-[100vh] grid grid-cols-12">
             <aside className="col-span-12 md:col-span-3 lg:col-span-2 max-w-[330px] bg-[#FFFF] ">
@@ -15,7 +15,7 @@ const TeacherDashboard = () => {
                         <img src={worldLogo} className="w-[80px] h-[50px]" />
                     </Link>
                 </div>
-                <Sidebar Sidebar={TeachersidebarItems} />
+                <Sidebar Sidebar={ParentSidebarItems} />
             </aside>
             <main className="col-span-12 md:col-span-9 lg:col-span-10 flex flex-col">
                 <nav className="h-[70px] w-full bg-[#FFFF]   flex justify-between px-10 font-poppins">
@@ -43,4 +43,4 @@ const TeacherDashboard = () => {
     )
 }
 
-export default TeacherDashboard
+export default ParentDashboardPage

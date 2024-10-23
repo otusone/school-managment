@@ -1,3 +1,5 @@
+
+
 export const TeachersidebarItems = [
     {
         title: "Dashboard",
@@ -87,6 +89,7 @@ export const TeachersidebarItems = [
             subtitle: "Add a new attendance record",
         },]
     },
+
     {
         title: "Announcement ",
         path: "teacher/dashboard/announcment",
@@ -190,18 +193,11 @@ export const StudentSidebarItems = [
         icon: <i className="fas fa-credit-card"></i>,
         // subtitle: "Add Attendance",
         // subpath: "admin/dashboard/attendance/add",
-        Links: [{
-            title: "Attendance",
-            path: "/student/dashboard/attendance",
-            icon: <i className="fas fa-credit-card"></i>,
-            subtitle: "View Attendance",
-        },
-        {
-            title: "Add Attendance",
-            path: "/student/dashboard/add/attendance",
-            icon: <i className="fas fa-plus"></i>,
-            subtitle: "Add a new attendance record",
-        },]
+
+    },
+    {
+        title: "Academic Calender",
+        path: "student/dashboard/academic-calender"
     },
     {
         title: "Announcement ",
@@ -236,5 +232,87 @@ export const StudentSidebarItems = [
     },
 
 
+];
+
+
+export const ParentSidebarItems = [
+    {
+        title: "Dashboard",
+        path: "parent/dashboard ",
+        icon: <i className="fas fa-tachometer-alt"></i>, // Replace with your icon component
+        subtitle: null,
+        subpath: null,
+    },
+    {
+        title: "Attendance ",
+        path: "parent/dashboard/attendance",
+        icon: <i className="fas fa-credit-card"></i>,
+        // subtitle: "Add Attendance",
+        // subpath: "admin/dashboard/attendance/add",
+
+    },
+    {
+        title: "TransPort ",
+        path: "parent/dashboard/transport",
+        icon: <i className="fas fa-credit-card"></i>,
+        Links: [{
+            title: "Transport List",
+            path: "/parent/dashboard/transport",
+            icon: <i className="fas fa-credit-card"></i>,
+            subtitle: "Transport List",
+        },
+        {
+            title: "Detail Transport Routes",
+            path: "/parent/dashboard/detail/transportRoute",
+            icon: <i className="fas fa-plus"></i>,
+            subtitle: "all record",
+        },]
+
+    },
+    {
+        title: "Timetable",
+        path: "parent/dashboard/timetable",
+        icon: <i className="fas fa-cog"></i>,
+        subtitle: null,
+        subpath: null,
+    },
+    {
+        title: "Announcement ",
+        path: "parent/dashboard/announcment",
+        icon: <i className="fas fa-comments"></i>,
+        subtitle: null,
+        subpath: null,
+    },
+
+    {
+        title: "Result",
+        path: "parent/dashboard/Result",
+        icon: <i className="fas fa-question-circle"></i>,
+        Links: [{
+            title: "All Exam Results",
+            path: "/parent/dashboard/Result",
+            icon: <i className="fas fa-credit-card"></i>,
+            subtitle: "Exam Result",
+        },
+        {
+            title: "Exam Result Detail",
+            path: "/parent/dashboard/detail/ExamResult",
+            icon: <i className="fas fa-plus"></i>,
+            subtitle: "Exam Detail",
+        },]
+    },
+
+    {
+        title: "Academic Calender",
+        path: "parent/dashboard/academic-calender"
+    },
+
+    {
+        title: "Parents ",
+        path: "parent/dashboard/parents",
+        icon: <i className="fas fa-comments"></i>,
+        subtitle: null,
+        subpath: null,
+    },
 ];
 

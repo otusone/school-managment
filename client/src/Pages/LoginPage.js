@@ -21,7 +21,7 @@ const validationSchema = yup.object().shape({
         .required("School Code is required"),
 });
 
-const AdminLogin = () => {
+const Login = () => {
     const [isPasswordVisible, setIsPasswordVisible] = useState(false);
     const navigate = useNavigate();
     const {
@@ -175,14 +175,16 @@ const AdminLogin = () => {
                     <hr className="h-[3px] bg-border-50 border-0 my-3" />
                     <p className="text-center text-[#00000080] font-semibold my-3 "> Login as</p>
                     <div className="grid grid-cols-2 gap-5 mt-5">
-                        <div className="bg-[#1BCFB4] py-2 ">
-                            <button className="text-center text-[#FFFFFF] font-semibold">Teacher</button>
 
-                        </div>
-                        <div className="bg-[#198AE2] py-2 ">
-                            <p className="text-center text-[#FFFFFF] font-semibold">Parent</p>
+                        <button
+                            onClick={() => navigate("/teacher/dashboard")}
+                            className="text-center text-[#FFFFFF] bg-[#1BCFB4] py-2 font-semibold">Teacher</button>
 
-                        </div>
+
+                        <button
+                            onClick={() => navigate("/parent/dashboard")}
+                            className=" bg-[#198AE2] py-2 text-center text-[#FFFFFF] font-semibold">Parent</button>
+
 
                     </div>
                 </form>
@@ -191,4 +193,4 @@ const AdminLogin = () => {
     );
 };
 
-export default AdminLogin;
+export default Login;

@@ -21,6 +21,14 @@ const StudentParents = () => {
             occupation: "IPS",
             phone: "099897999",
         },
+        {
+            relation: "Gardian",
+            name: "Raj Gor",
+            dob: "12-09-2000",
+            email: "chachu@example.com",
+            occupation: "Chachu",
+            phone: "009663999",
+        },
     ];
 
     return (

@@ -1,0 +1,17 @@
+/* Hides month and year header in Datepicker */
+.react-datepicker__header {
+    display: none;
+  }
+  
+  /* Optional: Center-align the calendar for better appearance */
+  .react-datepicker__month {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .react-datepicker__day--selected {
+    background-color: #1f911f !important; /* Blue background for selected date */
+    color: white !important;
+  }
+  
