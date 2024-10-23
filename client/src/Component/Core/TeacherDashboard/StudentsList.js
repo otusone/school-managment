@@ -3,6 +3,7 @@ import { BiSolidDownArrow } from "react-icons/bi";
 import { CiSearch } from "react-icons/ci";
 import { FaArrowDown } from "react-icons/fa6";
 import Headingtitle from "../../Common/Headingtitle";
+import SelectOption from "../../Common/SelectOption";
 
 const StudentList = () => {
     // State to manage visibility of centered cards for each student
@@ -13,26 +14,25 @@ const StudentList = () => {
         setExpandedIndex(expandedIndex === index ? null : index);
     };
 
+
+    const ALL = ["ALL", "Option 1", "Option 2", "Option 3"]; // Add more options as needed
+
+    const Date=["23-4-2023","23-4-13","03-12-21"]
+
+
     return (
         <div className="font-poppins">
-            <Headingtitle title="Students"/>
-
-            <main className="bg-white  rounded-md p-3 ">
-                <p className="font-bold text-[1rem] py-2 ">Student List</p>
+            <Headingtitle title="Students" />
+            <main className="bg-white min-h-[80vh]   rounded-md p-5 ">
+                <p className="font-semibold text-[1rem] pb-2 ">Student List</p>
 
                 {/* Filters Section */}
                 <div className="grid w-full text-[0.77rem] grid-cols-12 gap-5 grid-rows-2 mb-5">
                     {/* All Filter */}
-                    <div className="col-span-5 flex border-2 border-border-100 rounded-md p-2 justify-between">
-                        <p className="text-[0.77rem] font-semibold">ALL</p>
-                        <BiSolidDownArrow />
-                    </div>
+                    <SelectOption width={5} options={ALL} />
 
-                    {/* Date Filter */}
-                    <div className="col-span-3 flex justify-between px-2 text-[1.5rem] items-center font-bold rounded-md border-2 border-border-100">
-                        <p className="text-[0.9rem] font-semibold">2024-03-04</p>
-                        <BiSolidDownArrow />
-                    </div>
+                    
+                    <SelectOption width={3} options={Date}/>
 
                     {/* Search Input */}
                     <div className="col-span-4 flex gap-2 items-center pl-2 rounded-md border-2 border-border-100">

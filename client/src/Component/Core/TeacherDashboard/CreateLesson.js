@@ -17,8 +17,8 @@ const CreateLesson = () => {
         <div className="font-poppins">
             <Headingtitle title="Students"/>
 
-            <main className="bg-white relative w-full  rounded-md p-3 min-h-[600px]">
-                <p className="font-bold text-[1rem] py-2 ">Student List</p>
+            <main className="bg-white relative w-full  rounded-md p-5 min-h-[80vh]">
+                <p className="font-bold text-[1rem] pb-2 ">Create Lesson</p>
 
                 {/* Filters Section */}
                 <div className=" mx-auto flex flex-col  gap-3 max-w-[1050px] py-3 ">

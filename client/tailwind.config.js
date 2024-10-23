@@ -9,6 +9,7 @@ module.exports = {
         lato: ['Lato', 'sans-serif'],
         poppins: ['Poppins', 'sans-serif'],
         font1: ['"Font 1"', 'Arial', 'sans-serif'],
+        nunito: ['"Nunito Sans"', 'sans-serif'],
         montserrat: ['Montserrat', 'sans-serif'],
         'sf-pro-rounded': ['SF Pro Rounded', 'sans-serif'],
         uber: ['"UberMoveText"', 'system-ui', 'Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif']
@@ -27,12 +28,16 @@ module.exports = {
         text_gray: {
           50: "#c9c9c8",
           75: "#F7F7F7",
-          100: "#979797"
+          100: "#979797",
+          125: "#202224"
+        },
+        bg_blue: {
+          25: "#B8DAFF"
         },
         text_blue: {
           50: "#007BFF",
           100: "#198AE3",
-          200:"#060606",
+          200: "#060606",
           500: "#1A2A5A"
         }
       }

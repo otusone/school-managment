@@ -14,8 +14,8 @@ const AssignmentList = () => {
     return (
         <div className="font-poppins ">
             <Headingtitle title="Manage Assignment" />
-            <main className="bg-white rounded-md p-3 text-[0.77rem] relative min-h-[80vh]">
-                <p className="font-bold text-[1.1rem] ">Assignment List</p>
+            <main className="bg-white rounded-md p-5 text-[0.77rem] relative min-h-[80vh]">
+                <p className="font-semibold text-[1.1rem]  pb-2">Assignment List</p>
 
                 {/* Grid Layout */}
                 <section className="px-10 w-full font-poppins">
