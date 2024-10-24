@@ -1,11 +1,12 @@
 const express = require('express');
-const { createSuperAdmin, loginSuperAdmin, addClass, addSection } = require('../controllers/superAdmin');
-const { createAdminSchool, testAdmin } = require('../controllers/adminSchool');
+const { createSuperAdmin, loginSuperAdmin, addSection } = require('../controllers/superAdmin');
+const { createAdminSchool } = require('../controllers/adminSchool');
 const { superAdminAuth } = require('../middleware/auth');
 const { validateAdminSchool } = require('../middleware/fieldValidation');
 const router = express.Router();
 const multer=require("multer");
 const { addNewSubject } = require('../controllers/subject');
+const { addClassCategory } = require('../controllers/classCategory');
 
 const storage=multer.diskStorage({})
 
@@ -18,7 +19,7 @@ router.post('/login',loginSuperAdmin);
 
 // common
 router.post('/add-section',superAdminAuth,addSection);
-router.post('/add-class',superAdminAuth,addClass);
+router.post('/add-class-category',superAdminAuth,addClassCategory);
 router.post('/add-subject',superAdminAuth,addNewSubject);
 
 // admin school

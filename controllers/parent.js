@@ -124,7 +124,7 @@ exports.viewParentDetails = async (req, res) => {
                 select: 'studentId name email class dateOfBirth gender contactInfo avatar',
                 populate: {
                     path: 'class',
-                    select: 'className classSection'
+                    select: 'className classSection classTeacher'
                 }
             })
             .exec();

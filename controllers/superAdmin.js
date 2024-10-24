@@ -1,6 +1,5 @@
 const SuperAdmin = require('../models/superAdmin');
 const bcrypt = require("bcryptjs");
-const Class = require('../models/class');
 const Section = require('../models/section');
 
 const { generateSuperAdminId } = require('../utils/superAdminId');
@@ -85,34 +84,6 @@ exports.loginSuperAdmin = async (req, res) => {
     }
 };
 
-
-exports.addClass = async (req, res) => {
-    try {
-        const { className, classSection } = req.body;
-        const existingClass = await Class.findOne({ className, classSection });
-        if (existingClass) {
-            return res.status(400).json({ message: 'Class with this name and section already exists.' });
-        }
-
-        const newClass = new Class({
-            className,
-            classSection
-        });
-
-        await newClass.save();
-
-        return res.status(201).json({
-            message: 'Class added successfully.',
-            class: {
-                _id: newClass._id,
-                className: newClass.className,
-                classSection: newClass.classSection,
-            },
-        });
-    } catch (error) {
-        return res.status(500).json({ message: error.message || 'Internal server error. Please try again later.' });
-    }
-};
 
 exports.addSection = async (req, res) => {
     try {

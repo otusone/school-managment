@@ -7,10 +7,11 @@ exports.createExamTimetable = async (req, res) => {
   session.startTransaction();
 
   try {
-    const { class: classId, school, exams } = req.body;
+    const {_id:schoolId}=req.user
+    const { className, exams } = req.body;
 
-    if (!classId || !school || !Array.isArray(exams) || exams.length === 0) {
-      return res.status(400).send({ message: 'Class ID, School ID, and exam details are required.' });
+    if (!classId || !Array.isArray(exams) || exams.length === 0) {
+      return res.status(400).send({ message: 'Class ID and exam details are required.' });
     }
 
     // Process each exam detail
@@ -23,8 +24,8 @@ exports.createExamTimetable = async (req, res) => {
       }
 
       return {
-        class: classId,
-        school,
+        className,
+        school:schoolId,
         subject,
         section,
         examDate,

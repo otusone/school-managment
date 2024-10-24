@@ -7,6 +7,7 @@ const { addNewSubject, getAllSubjects } = require('../controllers/subject');
 const { createTimetable, updateTimetableExceptions } = require('../controllers/timeTable');
 const { onboardStudent, viewStudentDetails, getAllStudents } = require('../controllers/student');
 const { onboardParent, viewParentDetails } = require('../controllers/parent');
+const { addClass } = require('../controllers/class');
 
 const router = express.Router();
 
@@ -19,6 +20,11 @@ router.post('/login',loginAdminSchool);
 
 
 router.post('/add-subject',schoolAdminAuth,addNewSubject);
+
+// classes
+
+router.post('/add-class',schoolAdminAuth,addClass);
+
 
 // teacher
 router.post('/onboard-new-teacher',schoolAdminAuth, upload.single("avatar"),onboardTeacher);

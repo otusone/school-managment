@@ -2,16 +2,16 @@
 const mongoose = require('mongoose');
 const dbURL = process.env.MONGO_URI;
 const Teacher=require("../models/teacher")
+const SchoolClass=require("../models/class")
 
 mongoose.connect(dbURL, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(async() => {
     console.log('Connected to MongoDB');
 
-    // User.updateMany(
-    //   { aadharCardFrontImg: { $exists: false }, aadharCardBackImg: { $exists: false } },
+    // SchoolClass.updateMany(
+    //   { school: { $exists: false } },
     //   {
-    //     $set: { aadharCardFrontImg: "" },
-    //     $set: { aadharCardBackImg: "" }
+    //     $set: { school: "67139da0575e7a49b4179247" },
     //   }
     // ).then(result => {
     //   console.log('Updated records: ', result);

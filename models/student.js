@@ -9,6 +9,7 @@ const studentSchema = new mongoose.Schema({
     middleName: { type: String,trim: true},
     lastName: { type: String, required: true,trim: true },
   },
+  rollNumber:{type:String,},
   email: {type: String,required: true,},
   password: {type: String,required: true,},
   class: {type: mongoose.Schema.Types.ObjectId,ref: 'Class', required: true,},

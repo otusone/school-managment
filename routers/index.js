@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { getAllSection } = require('../controllers/section');
+const { getAllClassCategories } = require('../controllers/classCategory');
 
 
 const superAdmin = require('./superAdmin');
@@ -27,7 +28,12 @@ router.use('/class', classes)
 
 const subject = require('./subject');
 router.use('/subject', subject)
+
+
+
 // common
+router.get('/all-class-category-list', getAllClassCategories);
+
 
 
 module.exports = router;
