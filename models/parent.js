@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
 const parentSchema = new mongoose.Schema({
     parentId: { type: String, required: true, unique: true },
@@ -43,7 +45,7 @@ const parentSchema = new mongoose.Schema({
 
     password: { type: String, required: true },
     deviceTokens: [{ type: String, trim: true }],
-    token: [
+    tokens: [
         {
             token: { type: String, trim: true }
         }
@@ -86,7 +88,7 @@ parentSchema.methods.generateAuthToken = async function () {
     return token;
 }
 
-userSchema.methods.removeExpiredTokens = async function () {
+parentSchema.methods.removeExpiredTokens = async function () {
     const user = this;
     const currentTimestamp = Date.now() / 1000;
     user.tokens = user.tokens.filter(tokenObj => {

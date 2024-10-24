@@ -13,6 +13,11 @@ router.use('/admin-school', adminSchool);
 const teacher = require('./teacher');
 router.use('/teacher', teacher)
 
+const student = require('./student');
+router.use('/student', student)
+
+const parent = require('./parent');
+router.use('/parent', parent)
 
 const section = require('./section');
 router.use('/section', section)

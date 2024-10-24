@@ -172,7 +172,7 @@ exports.getAllTeacher = async (req, res) => {
         }
 
         const teachers = await Teacher.find({ adminSchoolId, school: schoolId })
-            .select('-token -updatedAt -isDeleted -lastLogin -createdAt');
+            .select('-token -specializations -school -schoolCode -adminSchoolId -subjects -updatedAt -isDeleted -lastLogin -createdAt');
 
         if (teachers.length === 0) {
             return res.status(404).json({ message: 'No teachers found for this school.' });

@@ -62,7 +62,11 @@ exports.onboardTeacher = async (req, res) => {
         session.endSession();
 
         const token = await newTeacher.generateAuthToken();
-
+        const loginCredentials={
+            email,
+            password,
+            teacherId
+          }
         return res.status(201).json({
             message: 'Teacher onboarded successfully',
             teacher: {
@@ -74,6 +78,7 @@ exports.onboardTeacher = async (req, res) => {
                 specializations: newTeacher.specializations,
                 token,
             },
+            loginCredentials
         });
     } catch (error) {
         await session.abortTransaction();
@@ -85,9 +90,9 @@ exports.onboardTeacher = async (req, res) => {
 
 exports.loginTeacher = async (req, res) => {
     try {
-        const { email, password, schoolCode } = req.body;
+        const { email, password, teacherId } = req.body;
 
-        const teacher = await Teacher.findOne({ email, schoolCode });
+        const teacher = await Teacher.findOne({ email, teacherId });
         if (!teacher) {
             return res.status(400).json({ message: 'Invalid credentials' });
         }
@@ -98,6 +103,8 @@ exports.loginTeacher = async (req, res) => {
         }
 
         const token = await teacher.generateAuthToken();
+        teacher.lastLogin = new Date(); 
+        await teacher.save();
 
         return res.status(200).json({
             message: 'Login successful',
@@ -131,6 +138,28 @@ exports.getTeacherProfile = async (req, res) => {
 
         return res.status(200).json({
             message: 'Teacher profile retrieved successfully',
+            teacher: teacher,
+        });
+    } catch (error) {
+        return res.status(500).json({ message: error.message || 'Internal server error. Please try again later.' });
+    }
+};
+
+exports.getTeacherDetails = async (req, res) => {
+    try {
+        const {teacherId} = req.params;
+
+        const teacher = await Teacher.findById(teacherId)
+            .select('-token -updatedAt')
+        // .populate('subjects.subjectId', 'name')
+        // .populate('subjects.classId', 'name');
+
+        if (!teacher) {
+            return res.status(404).json({ message: 'Teacher not found' });
+        }
+
+        return res.status(200).json({
+            message: 'Teacher Details retrieved successfully',
             teacher: teacher,
         });
     } catch (error) {
